@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   WebDriver wd;
   private ContactHelper contactHelper;
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
+  public SessionHelper sessionHelper;
+  public NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
   public void init() {
@@ -25,14 +25,6 @@ public class ApplicationManager {
     contactHelper = new ContactHelper(wd);
     sessionHelper.login("admin", "secret");
 
-  }
-
-  public void logout(String logout) {
-    wd.findElement(By.linkText(logout)).click();
-  }
-
-  public void gotoHomePage(String home) {
-    wd.findElement(By.linkText(home)).click();
   }
 
   public void stop() {
