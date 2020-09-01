@@ -2,7 +2,6 @@ package ru.stqa.katja.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class HelperBase {
@@ -21,7 +20,6 @@ public class HelperBase {
   protected void click(By locator) {
     wd.findElement(locator).click();
   }
-
 
   public boolean isAlertPresent() {
     try {
