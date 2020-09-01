@@ -25,17 +25,33 @@ public class ContactHelper extends HelperBase {
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("company"), contactData.getCompany());
     type(By.name("address"), contactData.getAddress());
-    click(By.name("theform"));
     click(By.name("home"));
-    type(By.name("home"),contactData.getPhone());
-    type(By.name("email"),contactData.getEmail());
+    type(By.name("home"), contactData.getPhone());
+    type(By.name("email"), contactData.getEmail());
     click(By.name("bday"));
     click(By.name("bmonth"));
     click(By.name("byear"));
     type(By.name("byear"), contactData.getByear());
-      }
+  }
 
   public void addNewContact(String s) {
-    wd.findElement(By.linkText(s)).click();
+    click(By.linkText(s));
+  }
+
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  public void deleteSelectedContact() {
+    click(By.xpath("//input[@value='Delete']"));
+
+  }
+
+  public void initContactModification() {
+    click(By.xpath("(//img[@alt='Edit'])[4]"));
+  }
+
+  public void submitContactModification() {
+    click(By.xpath("(//input[@name='update'])[2]"));
   }
 }

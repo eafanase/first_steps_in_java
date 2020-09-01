@@ -18,4 +18,8 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText(home));
 
   }
+
+  public void closeAlert() {
+    wd.switchTo().alert().accept();
+  }
 }

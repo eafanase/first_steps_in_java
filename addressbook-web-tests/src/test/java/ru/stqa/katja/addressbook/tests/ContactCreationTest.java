@@ -14,4 +14,4 @@ public class ContactCreationTest extends TestBase {
     app.navigationHelper.gotoHomePage("home");
     app.sessionHelper.logout("Logout");
   }
-  }
+}
