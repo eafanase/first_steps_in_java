@@ -17,7 +17,7 @@ public class ContactHelper extends HelperBase {
   }
 
   private void submitContactForm(By xpath) {
-    wd.findElement(xpath).click();
+     wd.findElement(xpath).click();
   }
 
   public void fillContactForm(ContactData contactData) {
@@ -34,8 +34,8 @@ public class ContactHelper extends HelperBase {
     type(By.name("byear"), contactData.getByear());
   }
 
-  public void addNewContact(String s) {
-    click(By.linkText(s));
+  public void addNewContact() {
+    click(By.linkText("add new"));
   }
 
   public void selectContact() {

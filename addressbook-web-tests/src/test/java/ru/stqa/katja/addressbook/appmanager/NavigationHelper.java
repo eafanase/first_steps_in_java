@@ -9,13 +9,13 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void gotoGroupPage(String groups) {
-    click(By.linkText(groups));
+  public void gotoGroupPage() {
+    click(By.linkText("groups"));
 
   }
 
-  public void gotoHomePage(String home) {
-    click(By.linkText(home));
+  public void gotoHomePage() {
+    click(By.linkText("home"));
 
   }
 

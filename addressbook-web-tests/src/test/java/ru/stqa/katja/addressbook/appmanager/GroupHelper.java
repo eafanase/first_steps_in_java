@@ -10,7 +10,7 @@ public class GroupHelper extends HelperBase {
     super(wd);
   }
 
-  public void returntoGroupPage(String group_page) {
+  public void returntoGroupPage() {
     click(By.linkText("group page"));
   }
 
@@ -20,8 +20,8 @@ public class GroupHelper extends HelperBase {
     type(By.name("group_footer"), groupData.getFooter());
   }
 
-  public void initGroupCreation(String s) {
-    click(By.name(s));
+  public void initGroupCreation() {
+    click(By.name("new"));
   }
 
   public void deleteSelectedGroups() {
@@ -32,8 +32,8 @@ public class GroupHelper extends HelperBase {
     click(By.xpath("(//input[@name='selected[]'])[2]"));
   }
 
-  public void submitGroupCreation(String submit) {
-    click(By.name(submit));
+  public void submitGroupCreation() {
+    click(By.name("submit"));
   }
 
   public void initGroupModification() {
