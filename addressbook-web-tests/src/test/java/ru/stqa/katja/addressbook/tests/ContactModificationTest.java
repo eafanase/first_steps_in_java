@@ -9,7 +9,7 @@ public class ContactModificationTest extends TestBase {
   public void testContactModification(){
     app.navigationHelper.gotoHomePage();
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Donald", "Duck", "DuckCompany", "Disneyland 12", "777-777-888", "duck@duck.com", "9", "August", "1928"));
+    app.getContactHelper().fillContactForm(new ContactData("Donald", "Duck", "DuckCompany", "Disneyland 12", "777-777-888", "duck@duck.com", "9", "August", "1928", null), false);
     app.getContactHelper().submitContactModification();
     app.navigationHelper.gotoHomePage();
 
