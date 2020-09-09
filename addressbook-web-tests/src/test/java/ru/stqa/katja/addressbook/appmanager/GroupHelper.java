@@ -25,11 +25,11 @@ public class GroupHelper extends HelperBase {
   }
 
   public void deleteSelectedGroups() {
-    click(By.xpath("(//input[@name='delete'])[2]"));
+    click(By.xpath("(//input[@name='delete'])"));
   }
 
   public void selectGroup() {
-    click(By.xpath("(//input[@name='selected[]'])[2]"));
+    click(By.xpath("(//input[@name='selected[]'])"));
   }
 
   public void submitGroupCreation() {
@@ -42,5 +42,16 @@ public class GroupHelper extends HelperBase {
 
   public void submitGroupModification() {
     click(By.name("update"));
+  }
+
+  public void createGroup(GroupData group) {
+    initGroupCreation();
+    fillGroupForm(group);
+    submitGroupCreation();
+    returntoGroupPage();
+  }
+
+  public boolean isThereAGroup() {
+  return isElementPresent(By.xpath("(//input[@name='selected[]'])"));
   }
 }
