@@ -62,22 +62,22 @@ public class ContactData {
   public String getByear() {
     return byear;
   }
-// Этот метод не работает, т.к. нужно сравнивать объекты
-//  @Override
-//  public String toString() {
-//    return "ContactData{" +
-//            "firstname='" + firstname + '\'' +
-//            ", lastname='" + lastname + '\'' +
-//            ", company='" + company + '\'' +
-//            ", address='" + address + '\'' +
-//            ", phone='" + phone + '\'' +
-//            ", email='" + email + '\'' +
-//            ", bday='" + bday + '\'' +
-//            ", bmonth='" + bmonth + '\'' +
-//            ", byear='" + byear + '\'' +
-//            ", group='" + group + '\'' +
-//            '}';
-//  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", company='" + company + '\'' +
+            ", address='" + address + '\'' +
+            ", phone='" + phone + '\'' +
+            ", email='" + email + '\'' +
+            ", bday='" + bday + '\'' +
+            ", bmonth='" + bmonth + '\'' +
+            ", byear='" + byear + '\'' +
+            ", group='" + group + '\'' +
+            '}';
+  }
 
   @Override
   public boolean equals(Object o) {
