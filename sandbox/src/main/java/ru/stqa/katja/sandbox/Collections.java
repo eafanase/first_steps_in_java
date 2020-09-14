@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Collections {
-  public static void main(String[] args){
+  public static void main(String[] args) {
 //   String [] langs = new String[4];                    //1. в скобках длина массива, ниже все строки, которые будут в нем
 //   langs[0] = "Java";
 //   langs[1] = "C#";
@@ -27,13 +27,13 @@ public class Collections {
 //    languages.add("Python");                           //5.
 
     List<String> languages = Arrays.asList("Java", "C#", "Python", "PHP");
-    for (String l: languages) {     //6. итерация по элементам списка при помощи счетчика
-    System.out.println("Я хочу выучить " + l); // 6.
+    for (String l : languages) {     //6. итерация по элементам списка при помощи счетчика
+      System.out.println("Я хочу выучить " + l); // 6.
 
 //    for (int i=0; i<languages.size(); i++) {  // 7. не удобно использовать переменную счетчик, лучше использовать 6.
 //      System.out.println("Я хочу выучить " + languages.get(i));
 
-  }
+    }
 
   }
 }
