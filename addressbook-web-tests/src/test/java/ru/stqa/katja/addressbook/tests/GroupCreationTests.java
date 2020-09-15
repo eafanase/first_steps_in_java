@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.katja.addressbook.model.GroupData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -25,21 +26,21 @@ public class GroupCreationTests extends TestBase {
 //    Assert.assertEquals(after, before+1); // проверка тоже меняется
     Assert.assertEquals(after.size(), before.size()+1);
 
+// старый способ сравнения
+//    int max =0;
+//    for (GroupData g: after){
+//      if (g.getId()> max) {
+//        max = g.getId();
+//          }
+//    }
 
-    int max =0;
-    for (GroupData g: after){
-      if (g.getId()> max) {
-        max = g.getId();
-          }
-    }
+// новый способ сравнения с компаратором
+//    Comparator<? super GroupData> byId = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(),o2.getId()); // можно избавиться от переменной byId, передать ее значение сразу в max
+    int max = after.stream().max((Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId();
     group.setId(max);
     before.add(group);
     Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
-
-
     app.sessionHelper.logout();
-
-
   }
 
 }
