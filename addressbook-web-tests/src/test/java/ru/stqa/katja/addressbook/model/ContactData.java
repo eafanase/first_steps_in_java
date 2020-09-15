@@ -3,6 +3,7 @@ package ru.stqa.katja.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
+  private final String id;
   private final String firstname;
   private final String lastname;
   private final String company;
@@ -14,7 +15,23 @@ public class ContactData {
   private final String byear;
   private String group;
 
+
   public ContactData(String firstname, String lastname, String company, String address, String phone, String email, String bday, String bmonth, String byear, String group) {
+    this.id = null;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.company = company;
+    this.address = address;
+    this.phone = phone;
+    this.email = email;
+    this.bday = bday;
+    this.bmonth = bmonth;
+    this.byear = byear;
+    this.group = group;
+  }
+
+  public ContactData(String id, String firstname, String lastname, String company, String address, String phone, String email, String bday, String bmonth, String byear, String group) {
+    this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.company = company;
@@ -63,10 +80,20 @@ public class ContactData {
     return byear;
   }
 
+  public String getGroup() {
+    return group;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+
   @Override
   public String toString() {
     return "ContactData{" +
-            "firstname='" + firstname + '\'' +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", company='" + company + '\'' +
             ", address='" + address + '\'' +
@@ -84,24 +111,13 @@ public class ContactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname) &&
-            Objects.equals(company, that.company) &&
-            Objects.equals(address, that.address) &&
-            Objects.equals(phone, that.phone) &&
-            Objects.equals(email, that.email) &&
-            Objects.equals(bday, that.bday) &&
-            Objects.equals(bmonth, that.bmonth) &&
-            Objects.equals(byear, that.byear) &&
-            Objects.equals(group, that.group);
+    return Objects.equals(id, that.id) &&
+            Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastname, that.lastname);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstname, lastname, company, address, phone, email, bday, bmonth, byear, group);
-  }
-
-  public String getGroup() {
-    return group;
+    return Objects.hash(id, firstname, lastname);
   }
 }

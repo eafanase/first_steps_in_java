@@ -14,14 +14,14 @@ public class ContactModificationTest extends TestBase {
   public void testContactModification(){
     app.navigationHelper.gotoHomePage();
     if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Donald", "Duck", "DuckCompany", "Disneyland 111", "777-777-888", "duck@duck.com", "9", "August", "1928","test1"));
+      app.getContactHelper().createContact(new ContactData("Donald", "Duck", null, null, null, null, null, null, null,null));
       app.navigationHelper.gotoHomePage();
     }
 //    int before = app.getContactHelper().getContactCount();
     List<ContactData> before= app.getContactHelper().getContactList();
     app.getContactHelper().selectContact(before.size()-1);
     app.getContactHelper().initContactModification();
-    ContactData contact = new ContactData("Donald", "Duck", "DuckCompany", "Disneyland 111", "777-777-888", "duck@duck.com", "9", "August", "1928","test1");
+    ContactData contact = new ContactData(before.get(before.size()-1).getId(),"Donald", "Duck", "DuckCompany", "Disneyland 111", "777-777-888", "duck@duck.com", "9", "August", "1928","test1");
     app.getContactHelper().fillContactForm(contact, false);
     app.getContactHelper().submitContactModification();
     app.navigationHelper.gotoHomePage();
