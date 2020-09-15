@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.katja.addressbook.model.ContactData;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
@@ -12,27 +12,20 @@ public class ContactCreationTest extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
-//    int before = app.getContactHelper().getContactCount();
-    List<ContactData> before= app.getContactHelper().getContactList();
+    List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().addNewContact();
-    ContactData contact = new ContactData("Donald", "Duck", null, null, null, null, null, null, null,null);
+    ContactData contact = new ContactData("Donald", "Duck", null, null, null, null, null, null, null, "test1");
     app.getContactHelper().fillContactForm(contact, true);
     app.getContactHelper().submitContactForm();
     app.navigationHelper.gotoHomePage();
-//    int after = app.getContactHelper().getContactCount();
     List<ContactData> after = app.getContactHelper().getContactList();
-//    Assert.assertEquals(after, before+1);
-    Assert.assertEquals(after.size(), before.size()+1);
+    Assert.assertEquals(after.size(), before.size() + 1);
 
-    int max =0;
-    for (ContactData c: after){
-      if (c.getId()> max) {
-        max = c.getId();
-      }
-    }
-    contact.setId(max);
     before.add(contact);
-    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
     app.sessionHelper.logout();
   }
 }

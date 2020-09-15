@@ -57,25 +57,23 @@ public class GroupHelper extends HelperBase {
   }
 
   public boolean isThereAGroup() {
-  return isElementPresent(By.xpath("(//input[@name='selected[]'])"));
+    return isElementPresent(By.xpath("(//input[@name='selected[]'])"));
   }
 
   public int getGroupCount() {
-  return  wd.findElements(By.name("selected[]")).size();
+    return wd.findElements(By.name("selected[]")).size();
   }
 
   public List<GroupData> getGroupList() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group")); // означает найти все элементы с тегом span и класс group
-    for (WebElement element: elements) {   //переменная element пробегает по списку elements
-    String name= element.getText();
+    for (WebElement element : elements) {   //переменная element пробегает по списку elements
+      String name = element.getText();
 //    String id = element.findElement(By.tagName("input")).getAttribute("value"); // нужно поменять тип переменной на инт
-      int id = Integer.parseInt (element.findElement(By.tagName("input")).getAttribute("value")); // Integer.parseInt для замены типа переменной
-    GroupData group = new GroupData(id, name, null, null);
-    groups.add(group);
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")); // Integer.parseInt для замены типа переменной
+      GroupData group = new GroupData(id, name, null, null);
+      groups.add(group);
     }
-
-
-      return groups;
+    return groups;
   }
 }

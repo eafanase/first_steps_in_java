@@ -8,8 +8,12 @@ public class GroupData {
   private final String header;
   private final String footer;
 
-  public GroupData( String name, String header, String footer) {
-    this.id = 0; // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный
+
+
+  public GroupData(String name, String header, String footer) {
+//    this.id = 0; // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный. =0 значит, что группа будет оказываться всегда в начале
+// нужно чтоб группа с макс айди была в конце списка =>
+    this.id = Integer.MAX_VALUE;
     this.name = name;
     this.header = header;
     this.footer = footer;
@@ -60,12 +64,12 @@ public class GroupData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     GroupData groupData = (GroupData) o;
-    return id == groupData.id &&
-            Objects.equals(name, groupData.name);
+    return Objects.equals(name, groupData.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(name);
   }
+
 }
