@@ -69,7 +69,8 @@ public class GroupHelper extends HelperBase {
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group")); // означает найти все элементы с тегом span и класс group
     for (WebElement element: elements) {   //переменная element пробегает по списку elements
     String name= element.getText();
-    String id = element.findElement(By.tagName("input")).getAttribute("value");
+//    String id = element.findElement(By.tagName("input")).getAttribute("value"); // нужно поменять тип переменной на инт
+      int id = Integer.parseInt (element.findElement(By.tagName("input")).getAttribute("value")); // Integer.parseInt для замены типа переменной
     GroupData group = new GroupData(id, name, null, null);
     groups.add(group);
     }

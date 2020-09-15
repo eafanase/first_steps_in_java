@@ -3,7 +3,7 @@ package ru.stqa.katja.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private final String id;
+  private int id;
   private final String firstname;
   private final String lastname;
   private final String company;
@@ -17,7 +17,7 @@ public class ContactData {
 
 
   public ContactData(String firstname, String lastname, String company, String address, String phone, String email, String bday, String bmonth, String byear, String group) {
-    this.id = null;
+    this.id = 0;
     this.firstname = firstname;
     this.lastname = lastname;
     this.company = company;
@@ -30,7 +30,7 @@ public class ContactData {
     this.group = group;
   }
 
-  public ContactData(String id, String firstname, String lastname, String company, String address, String phone, String email, String bday, String bmonth, String byear, String group) {
+  public ContactData(int id, String firstname, String lastname, String company, String address, String phone, String email, String bday, String bmonth, String byear, String group) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
@@ -84,10 +84,13 @@ public class ContactData {
     return group;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
 
   @Override
   public String toString() {
@@ -111,7 +114,7 @@ public class ContactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return Objects.equals(id, that.id) &&
+    return id == that.id &&
             Objects.equals(firstname, that.firstname) &&
             Objects.equals(lastname, that.lastname);
   }
@@ -120,4 +123,7 @@ public class ContactData {
   public int hashCode() {
     return Objects.hash(id, firstname, lastname);
   }
+
+
+
 }

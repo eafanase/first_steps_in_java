@@ -3,19 +3,19 @@ package ru.stqa.katja.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private final String id;
+  private  int id; // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный// убираем final, чтоб менять id и сгенерировать setter
   private final String name;
   private final String header;
   private final String footer;
 
-  public GroupData(String name, String header, String footer) {
-    this.id = null;
+  public GroupData( String name, String header, String footer) {
+    this.id = 0; // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный
     this.name = name;
     this.header = header;
     this.footer = footer;
   }
 
-  public GroupData(String id,String name, String header, String footer) {
+  public GroupData(int id,String name, String header, String footer) {  // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный
     this.id = id;
     this.name = name;
     this.header = header;
@@ -34,8 +34,25 @@ public class GroupData {
     return footer;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+
+
+
+  @Override
+  public String toString() {
+    return "GroupData{" +
+             "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            ", header='" + header + '\'' +
+            ", footer='" + footer + '\'' +
+            '}';
   }
 
   @Override
@@ -43,7 +60,7 @@ public class GroupData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     GroupData groupData = (GroupData) o;
-    return Objects.equals(id, groupData.id) &&
+    return id == groupData.id &&
             Objects.equals(name, groupData.name);
   }
 
@@ -51,15 +68,4 @@ public class GroupData {
   public int hashCode() {
     return Objects.hash(id, name);
   }
-
-  @Override
-  public String toString() {
-    return "GroupData{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            ", header='" + header + '\'' +
-            ", footer='" + footer + '\'' +
-            '}';
-  }
-
 }

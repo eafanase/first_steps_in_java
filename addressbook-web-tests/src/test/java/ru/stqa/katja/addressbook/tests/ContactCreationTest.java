@@ -3,8 +3,8 @@ package ru.stqa.katja.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.katja.addressbook.model.ContactData;
-import ru.stqa.katja.addressbook.model.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
@@ -15,13 +15,24 @@ public class ContactCreationTest extends TestBase {
 //    int before = app.getContactHelper().getContactCount();
     List<ContactData> before= app.getContactHelper().getContactList();
     app.getContactHelper().addNewContact();
-    app.getContactHelper().fillContactForm(new ContactData("Donald", "Duck", "DuckCompany", "Disneyland 111", "777-777-888", "duck@duck.com", "9", "August", "1928","test1"), true);
+    ContactData contact = new ContactData("Donald", "Duck", null, null, null, null, null, null, null,null);
+    app.getContactHelper().fillContactForm(contact, false);
     app.getContactHelper().submitContactForm();
     app.navigationHelper.gotoHomePage();
 //    int after = app.getContactHelper().getContactCount();
     List<ContactData> after = app.getContactHelper().getContactList();
 //    Assert.assertEquals(after, before+1);
     Assert.assertEquals(after.size(), before.size()+1);
+
+    int max =0;
+    for (ContactData c: after){
+      if (c.getId()> max) {
+        max = c.getId();
+      }
+    }
+    contact.setId(max);
+    before.add(contact);
+    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
     app.sessionHelper.logout();
   }
 }
