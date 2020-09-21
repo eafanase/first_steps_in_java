@@ -26,6 +26,6 @@ public class ContactCreationTest extends TestBase {
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
-    app.sessionHelper.logout();
+ //   app.sessionHelper.logout();
   }
 }
