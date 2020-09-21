@@ -3,46 +3,74 @@ package ru.stqa.katja.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String company;
-  private final String address;
-  private final String phone;
-  private final String email;
-  private final String bday;
-  private final String bmonth;
-  private final String byear;
+  private int id = Integer.MAX_VALUE;
+  private  String firstname;
+  private  String lastname;
+  private  String company;
+  private  String address;
+  private  String phone;
+  private String email;
+  private  String bday;
+  private  String bmonth;
+  private  String byear;
   private String group;
 
 
-  public ContactData(String firstname, String lastname, String company, String address, String phone, String email, String bday, String bmonth, String byear, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.company = company;
-    this.address = address;
-    this.phone = phone;
-    this.email = email;
-    this.bday = bday;
-    this.bmonth = bmonth;
-    this.byear = byear;
-    this.group = group;
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
   }
 
-  public ContactData(int id, String firstname, String lastname, String company, String address, String phone, String email, String bday, String bmonth, String byear, String group) {
-    this.id = id;
+  public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
-    this.lastname = lastname;
-    this.company = company;
-    this.address = address;
-    this.phone = phone;
-    this.email = email;
-    this.bday = bday;
-    this.bmonth = bmonth;
-    this.byear = byear;
-    this.group = group;
+    return this;
   }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withPhone(String phone) {
+    this.phone = phone;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withBday(String bday) {
+    this.bday = bday;
+    return this;
+  }
+
+  public ContactData withBmonth(String bmonth) {
+    this.bmonth = bmonth;
+    return this;
+  }
+
+  public ContactData withByear(String byear) {
+    this.byear = byear;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
 
   public String getFirstname() {
     return firstname;
@@ -88,9 +116,7 @@ public class ContactData {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+
 
   @Override
   public String toString() {

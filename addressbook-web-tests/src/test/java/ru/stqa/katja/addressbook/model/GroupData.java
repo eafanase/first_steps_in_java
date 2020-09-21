@@ -3,30 +3,12 @@ package ru.stqa.katja.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private  int id; // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный// убираем final, чтоб менять id и сгенерировать setter
-  private final String name;
-  private final String header;
-  private final String footer;
+  private  int id = Integer.MAX_VALUE;
+  private  String name;
+  private  String header;
+  private  String footer;
 
-
-
-  public GroupData(String name, String header, String footer) {
-//    this.id = 0; // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный. =0 значит, что группа будет оказываться всегда в начале
-// нужно чтоб группа с макс айди была в конце списка =>
-    this.id = Integer.MAX_VALUE;
-    this.name = name;
-    this.header = header;
-    this.footer = footer;
-  }
-
-  public GroupData(int id,String name, String header, String footer) {  // меняем везде тип на int со стринг, чтоб сравнить айди и найти максимальный
-    this.id = id;
-    this.name = name;
-    this.header = header;
-    this.footer = footer;
-  }
-
-  public String getName() {
+   public String getName() {
     return name;
   }
 
@@ -42,8 +24,24 @@ public class GroupData {
     return id;
   }
 
-  public void setId(int id) {
+  public GroupData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public GroupData withName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public GroupData withHeader(String header) {
+    this.header = header;
+    return this;
+  }
+
+  public GroupData withFooter(String footer) {
+    this.footer = footer;
+    return this;
   }
 
 
