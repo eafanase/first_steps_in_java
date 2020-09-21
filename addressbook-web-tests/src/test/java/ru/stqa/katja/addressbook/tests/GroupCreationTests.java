@@ -12,7 +12,7 @@ public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() {
-    app.goTo().GroupPage();
+    app.goTo().groupPage();
     List<GroupData> before = app.group().list();
     GroupData group = new GroupData("test1", "null", "null");
     app.group().create(group);
