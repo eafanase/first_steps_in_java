@@ -12,13 +12,11 @@ public class ContactCreationTest extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().addNewContact();
+    List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData("Donald", "Duck", null, null, null, null, null, null, null, "test1");
-    app.getContactHelper().fillContactForm(contact, true);
-    app.getContactHelper().submitContactForm();
+    app.contact().create(contact);
     app.navigationHelper.gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(contact);

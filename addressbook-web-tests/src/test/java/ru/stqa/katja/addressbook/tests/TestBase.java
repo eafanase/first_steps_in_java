@@ -9,13 +9,13 @@ public class TestBase {
 
   protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
-  @BeforeSuite(alwaysRun = true)
-  public void setUp() throws Exception {
+  @BeforeSuite()
+  public void setUp() {
     app.init();
   }
 
-  @AfterSuite(alwaysRun = true)
-  public void tearDown() throws Exception {
+  @AfterSuite()
+  public void tearDown() {
     app.stop();
   }
 
