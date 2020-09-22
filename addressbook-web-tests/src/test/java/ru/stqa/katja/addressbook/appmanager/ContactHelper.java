@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.katja.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -98,6 +100,20 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
+//    List<WebElement> elements = wd.findElements(By.cssSelector("input[type='checkbox'][name='selected[]']"));
+    List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
+    for (WebElement element : elements) {
+      String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+      String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+//      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+    }
+    return contacts;
+  }
+
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
 //    List<WebElement> elements = wd.findElements(By.cssSelector("input[type='checkbox'][name='selected[]']"));
     List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
     for (WebElement element : elements) {
