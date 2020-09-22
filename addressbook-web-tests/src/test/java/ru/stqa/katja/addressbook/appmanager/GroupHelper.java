@@ -7,9 +7,7 @@ import ru.stqa.katja.addressbook.model.GroupData;
 import ru.stqa.katja.addressbook.model.Groups;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -37,12 +35,12 @@ public class GroupHelper extends HelperBase {
 
   public void selectGroup(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
-//    click(By.xpath("(//input[@name='selected[]'])"));
+
   }
 
   public void selectGroupById(int id) {
-    wd.findElement(By.cssSelector("input[value= '" +id+"']")).click();
-//    click(By.xpath("(//input[@name='selected[]'])"));
+    wd.findElement(By.cssSelector("input[value= '" + id + "']")).click();
+
   }
 
   public void submitGroupCreation() {
@@ -73,7 +71,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void delete(int index) {
-   selectGroup(index);
+    selectGroup(index);
     deleteSelectedGroups();
     returntoGroupPage();
   }
@@ -98,7 +96,6 @@ public class GroupHelper extends HelperBase {
     for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
- //     GroupData group = new GroupData().withId(id).withName(name);
       groups.add(new GroupData().withId(id).withName(name));
     }
     return groups;
@@ -110,7 +107,6 @@ public class GroupHelper extends HelperBase {
     for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      //     GroupData group = new GroupData().withId(id).withName(name);
       groups.add(new GroupData().withId(id).withName(name));
     }
     return groups;

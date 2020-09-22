@@ -9,9 +9,7 @@ import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -56,14 +54,12 @@ public class ContactHelper extends HelperBase {
 
   public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
-   // click(By.name("selected[]"));
+    // click(By.name("selected[]"));
   }
 
   public void selectContactById(int id) {
- //   wd.findElements(By.name("selected[]")).get(index).click();
-    wd.findElement(By.cssSelector("input[value= '" +id+"']")).click();
-    // click(By.name("selected[]"));
-  }
+     wd.findElement(By.cssSelector("input[value= '" + id + "']")).click();
+      }
 
   public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
@@ -72,12 +68,11 @@ public class ContactHelper extends HelperBase {
 
   public void initContactModification(int index) {
     wd.findElements(By.xpath("(//img[@alt='Edit'])")).get(index).click();
- //   click(By.xpath("(//img[@alt='Edit'])"));
-  }
+     }
 
   public void initContactModificationById(int id) {
-    wd.findElement(By.cssSelector("a[href='edit.php?id=" +id+"']")).click();
-    //   click(By.xpath("(//img[@alt='Edit'])"));
+    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+
   }
 
   public void submitContactModification() {
@@ -88,7 +83,7 @@ public class ContactHelper extends HelperBase {
     addNewContact();
     fillContactForm(contact, true);
     submitContactForm();
-    }
+  }
 
   public void modify(int index, ContactData contact) {
     initContactModification(index);
@@ -104,8 +99,8 @@ public class ContactHelper extends HelperBase {
   }
 
   public void delete(int index) {
-   selectContact(index);
-   deleteSelectedContact();
+    selectContact(index);
+    deleteSelectedContact();
   }
 
   public void delete(ContactData contact) {
@@ -123,13 +118,11 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-//    List<WebElement> elements = wd.findElements(By.cssSelector("input[type='checkbox'][name='selected[]']"));
     List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
     for (WebElement element : elements) {
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-//      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
       contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
@@ -137,18 +130,15 @@ public class ContactHelper extends HelperBase {
 
   public Contact all() {
     Contact contacts = new Contact();
-//    List<WebElement> elements = wd.findElements(By.cssSelector("input[type='checkbox'][name='selected[]']"));
     List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
     for (WebElement element : elements) {
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-//      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
       contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
   }
-
 
 
 }
