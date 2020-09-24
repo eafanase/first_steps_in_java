@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
+import ru.stqa.katja.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,7 @@ public class ContactHelper extends HelperBase {
     addNewContact();
     fillContactForm(contact, true);
     submitContactForm();
+    contactCache = null;
   }
 
   public void modify(int index, ContactData contact) {
@@ -96,6 +98,7 @@ public class ContactHelper extends HelperBase {
     initContactModificationById(contact.getId());
     fillContactForm(contact, false);
     submitContactModification();
+    contactCache = null;
   }
 
   public void delete(int index) {
@@ -106,6 +109,7 @@ public class ContactHelper extends HelperBase {
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContact();
+    contactCache = null;
   }
 
   public boolean isThereAContact() {
@@ -128,17 +132,21 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
-  public Contact all() {
-    Contact contacts = new Contact();
-    List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
-    for (WebElement element : elements) {
-      String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
-      String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+  private Contact contactCache = null;
+
+    public Contact all() {
+      if (contactCache != null) {
+        return new Contact(contactCache);
+      }
+
+      contactCache = new Contact();
+      List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
+      for (WebElement element : elements) {
+        String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+        String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+        int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+        contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      }
+      return contactCache;
     }
-    return contacts;
   }
-
-
-}
