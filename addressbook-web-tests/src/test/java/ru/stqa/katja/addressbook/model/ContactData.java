@@ -9,6 +9,8 @@ public class ContactData {
   private  String company;
   private  String address;
   private  String phone;
+  private  String mobphone;
+  private  String workphone;
   private String email;
   private  String bday;
   private  String bmonth;
@@ -43,6 +45,16 @@ public class ContactData {
 
   public ContactData withPhone(String phone) {
     this.phone = phone;
+    return this;
+  }
+
+  public ContactData withMobphone (String mobphone) {
+    this.mobphone = mobphone;
+    return this;
+  }
+
+  public ContactData withWorkphone(String workphone) {
+    this.workphone = workphone;
     return this;
   }
 
@@ -92,6 +104,14 @@ public class ContactData {
     return phone;
   }
 
+  public String getMobphone() {
+    return mobphone;
+  }
+
+  public String getWorkphone() {
+    return workphone;
+  }
+
   public String getEmail() {
     return email;
   }
@@ -116,17 +136,17 @@ public class ContactData {
     return id;
   }
 
-
-
   @Override
   public String toString() {
     return "ContactData{" +
-            "id='" + id + '\'' +
+            "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", company='" + company + '\'' +
             ", address='" + address + '\'' +
             ", phone='" + phone + '\'' +
+            ", mobphone='" + mobphone + '\'' +
+            ", workphone='" + workphone + '\'' +
             ", email='" + email + '\'' +
             ", bday='" + bday + '\'' +
             ", bmonth='" + bmonth + '\'' +
@@ -134,6 +154,7 @@ public class ContactData {
             ", group='" + group + '\'' +
             '}';
   }
+
 
   @Override
   public boolean equals(Object o) {
