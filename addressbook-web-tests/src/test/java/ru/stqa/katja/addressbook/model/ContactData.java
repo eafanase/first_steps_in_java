@@ -4,21 +4,21 @@ import java.util.Objects;
 
 public class ContactData {
   private int id = Integer.MAX_VALUE;
-  private  String firstname;
-  private  String lastname;
-  private  String company;
-  private  String address;
-  private  String phone;
-  private  String mobphone;
-  private  String workphone;
-  private  String allphones;
+  private String firstname;
+  private String lastname;
+  private String company;
+  private String address;
+  private String phone;
+  private String mobphone;
+  private String workphone;
+  private String allphones;
   private String email;
   private String email2;
   private String email3;
   private String allemails;
-  private  String bday;
-  private  String bmonth;
-  private  String byear;
+  private String bday;
+  private String bmonth;
+  private String byear;
   private String group;
 
 
@@ -67,7 +67,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withMobphone (String mobphone) {
+  public ContactData withMobphone(String mobphone) {
     this.mobphone = mobphone;
     return this;
   }
@@ -77,7 +77,7 @@ public class ContactData {
     return this;
   }
 
-   public ContactData withAllPhones(String allphones) {
+  public ContactData withAllPhones(String allphones) {
     this.allphones = allphones;
     return this;
   }
@@ -124,7 +124,7 @@ public class ContactData {
     return address;
   }
 
-   public String getPhone() {
+  public String getPhone() {
     return phone;
   }
 
@@ -151,7 +151,8 @@ public class ContactData {
   public String getEmail2() {
     return email2;
   }
-  public String getAllemails() {
+
+  public String getAllEmails() {
     return allemails;
   }
 

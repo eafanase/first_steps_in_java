@@ -10,29 +10,29 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactPhoneTests extends TestBase {
+public class ContactEmailTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
     if (app.contact().list().size() == 0) {
       app.contact().create(new ContactData().withFirstname("Donald").withLastname("Duck").
-              withPhone("111").withMobphone("222").withWorkphone("333").withGroup("test1"));
+              withEmail("duck@duck.com").withEmail2("duck2@duck.com").withEmail3("duck3@duck.com").withGroup("test1"));
       app.goTo().homePage();
     }
   }
 
   @Test
-  public void testContactPhones() {
+  public void testContactEmails() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-    assertThat(contact.getAllphones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
 
   }
 
-  private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getPhone(), contact.getMobphone(), contact.getWorkphone())
+  private String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
             .stream().filter((s -> !s.equals("")))
             .map(ContactPhoneTests::cleaned)
             .collect(Collectors.joining("\n"));
@@ -40,8 +40,9 @@ public class ContactPhoneTests extends TestBase {
   }
 
 
-  public static String cleaned(String phone) {
-    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+  public static String cleaned(String email) {
+    return email.replaceAll("\\s", "");
   }
 }
+
 
