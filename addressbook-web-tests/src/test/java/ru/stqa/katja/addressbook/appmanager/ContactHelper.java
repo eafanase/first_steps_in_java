@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
-import ru.stqa.katja.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,9 +144,10 @@ public class ContactHelper extends HelperBase {
         String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
         String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
         int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-        String[] phones = element.findElement(By.cssSelector("td:nth-child(6)")).getText().split("\n");
+        String allPhones = element.findElement(By.cssSelector("td:nth-child(6)")).getText();
+ //       String[] phones = element.findElement(By.cssSelector("td:nth-child(6)")).getText().split("\n");
         contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).
-                withPhone(phones[0]).withMobphone(phones[1]).withWorkphone(phones[2]));
+                withAllPhones(allPhones));
       }
       return contactCache;
     }

@@ -7,6 +7,9 @@ import org.testng.annotations.Test;
 import ru.stqa.katja.addressbook.model.ContactData;
 import ru.stqa.katja.addressbook.tests.TestBase;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -26,11 +29,20 @@ public class ContactPhoneTests extends TestBase {
       app.goTo().homePage();
       ContactData contact = app.contact().all().iterator().next();
       ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-      assertThat(contact.getPhone(), equalTo(cleaned(contactInfoFromEditForm.getPhone())));
-      assertThat(contact.getMobphone(), equalTo(cleaned(contactInfoFromEditForm.getMobphone())));
-      assertThat(contact.getWorkphone(), equalTo(cleaned(contactInfoFromEditForm.getWorkphone())));
+      assertThat(contact.getAllphones(), equalTo(mergePhones(contactInfoFromEditForm)));
+
     }
-    public String cleaned(String phone){
+
+  private String mergePhones(ContactData contact) {
+   return Arrays.asList(contact.getPhone(),contact.getMobphone(),contact.getWorkphone())
+            .stream().filter((s -> !s.equals("")))
+            .map(ContactPhoneTests::cleaned)
+            .collect(Collectors.joining("\n"));
+
+      }
+
+
+  public static String cleaned(String phone){
       return phone.replaceAll("\\s","").replaceAll("[-()]","");
     }
   }
