@@ -43,6 +43,7 @@ public class ContactHelper extends HelperBase {
     click(By.name("bmonth"));
     click(By.name("byear"));
     type(By.name("byear"), contactData.getByear());
+    attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
