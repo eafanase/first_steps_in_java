@@ -3,9 +3,11 @@ package ru.stqa.katja.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
-import ru.stqa.katja.addressbook.model.ContactData;
 import ru.stqa.katja.addressbook.model.GroupData;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,10 +41,20 @@ public class GroupDataGenerator {
       saveAsCsv(groups, new File (file));
     } else if (format.equals("xml")){
       saveAsXml(groups,new File(file));
+    } else if (format.equals("json")){
+      saveAsJson(groups,new File(file));
     } else {
       System.out.println("Unrecognized format" + format);
     }
 
+  }
+
+  private void saveAsJson(List<GroupData> groups, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    String json = gson.toJson(groups);
+    Writer writer = new FileWriter(file);
+    writer.write(json);
+    writer.close();
   }
 
   private void saveAsXml(List<GroupData> groups, File file) throws IOException {
