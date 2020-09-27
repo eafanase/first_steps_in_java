@@ -1,0 +1,20 @@
+[
+  {
+    "firstname": "Donald 0",
+    "lastname": "Duck 0",
+    "phone": "888880",
+    "group": "test1"
+  },
+  {
+    "firstname": "Donald 1",
+    "lastname": "Duck 1",
+    "phone": "888881",
+    "group": "test1"
+  },
+  {
+    "firstname": "Donald 2",
+    "lastname": "Duck 2",
+    "phone": "888882",
+    "group": "test1"
+  }
+]
