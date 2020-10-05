@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ContactHelper extends HelperBase {
     click(By.name("bmonth"));
     click(By.name("byear"));
     type(By.name("byear"), contactData.getByear());
-    attach(By.name("photo"), contactData.getPhoto());
+ //   attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());

@@ -81,7 +81,6 @@ public class ContactData {
   private String photo;
 
 
-
   public File getPhoto() {
     return  new File(photo);
   }
@@ -229,6 +228,27 @@ public class ContactData {
     return bday;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+            Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(company, that.company) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(phone, that.phone) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(byear, that.byear) &&
+            Objects.equals(group, that.group);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname, lastname, company, address, phone, email, byear, group);
+  }
+
   public String getBmonth() {
     return bmonth;
   }
@@ -256,29 +276,15 @@ public class ContactData {
             ", phone='" + phone + '\'' +
             ", mobphone='" + mobphone + '\'' +
             ", workphone='" + workphone + '\'' +
+            ", allphones='" + allphones + '\'' +
             ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", allemails='" + allemails + '\'' +
             ", bday='" + bday + '\'' +
             ", bmonth='" + bmonth + '\'' +
             ", byear='" + byear + '\'' +
             ", group='" + group + '\'' +
             '}';
   }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
-  }
-
-
 }
