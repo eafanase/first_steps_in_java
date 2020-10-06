@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
+import ru.stqa.katja.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +108,18 @@ public class ContactHelper extends HelperBase {
     contactCache = null;
   }
 
+  public void addToGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    addContactTogroup(contact, group);
+
+  }
+
+  private void addContactTogroup(ContactData contactData, GroupData group) {
+ //   new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+    click(By.xpath("(//input[@value='Add to'])"));
+  }
+
   public void delete(int index) {
     selectContact(index);
     deleteSelectedContact();
@@ -177,5 +190,6 @@ public class ContactHelper extends HelperBase {
             withPhone(phone).withMobphone(mobphone).withWorkphone(workphone)
             .withAddress(allAddresses).withEmail(email).withEmail2(email2).withEmail3(email3);
   }
+
 
 }
