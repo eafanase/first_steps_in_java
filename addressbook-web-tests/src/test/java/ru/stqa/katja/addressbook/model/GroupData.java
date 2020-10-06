@@ -10,21 +10,22 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
+
 @XStreamAlias("group")
 @Entity
-@Table (name = "group_list")
+@Table(name = "group_list")
 public class GroupData {
   @XStreamOmitField
   @Id
-  @Column (name = "group_id")
-  private  int id = Integer.MAX_VALUE;
+  @Column(name = "group_id")
+  private int id = Integer.MAX_VALUE;
   @Expose
-  @Column (name = "group_name")
-  private  String name;
+  @Column(name = "group_name")
+  private String name;
   @Expose
-  @Column (name = "group_header")
-  @Type(type = "text" )
-  private  String header;
+  @Column(name = "group_header")
+  @Type(type = "text")
+  private String header;
 
   @Override
   public boolean equals(Object o) {
@@ -43,9 +44,9 @@ public class GroupData {
   }
 
   @Expose
-  @Column (name = "group_footer")
-  @Type(type = "text" )
-  private  String footer;
+  @Column(name = "group_footer")
+  @Type(type = "text")
+  private String footer;
 
   public String getName() {
     return name;
@@ -84,12 +85,10 @@ public class GroupData {
   }
 
 
-
-
   @Override
   public String toString() {
     return "GroupData{" +
-             "id='" + id + '\'' +
+            "id='" + id + '\'' +
             ", name='" + name + '\'' +
             ", header='" + header + '\'' +
             ", footer='" + footer + '\'' +
