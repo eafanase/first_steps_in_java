@@ -14,7 +14,8 @@ public class ContactAddressTest extends TestBase {
     if (app.contact().list().size() == 0) {
       app.contact().create(new ContactData().withFirstname("Donald").withLastname("Duck").
               withAddress("Disneyland 111\nDisneyland 222\nDisneyland 333")
-              .withGroup("test1"));
+              //.withGroup("test1")
+      );
       app.goTo().homePage();
     }
   }
