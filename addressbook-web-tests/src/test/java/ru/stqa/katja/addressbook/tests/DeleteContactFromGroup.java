@@ -8,8 +8,6 @@ import ru.stqa.katja.addressbook.model.Groups;
 
 import java.io.File;
 
-import static ru.stqa.katja.addressbook.tests.TestBase.app;
-
 public class DeleteContactFromGroup extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
@@ -33,11 +31,12 @@ public class DeleteContactFromGroup extends TestBase {
     if (deletedContact.getGroups().size() > 0) {
       app.goTo().homePage();
       app.contact().deleteFromGroup(deletedContact);
+    } else {
+      GroupData addedGroup = app.db().groups().iterator().next();
+      app.contact().addToGroup((deletedContact.inGroup((groups.iterator().next()))), addedGroup);
+      app.goTo().homePage();
+      app.contact().deleteFromGroup(deletedContact);
     }
-   else {
-    deletedContact.inGroup((groups.iterator().next()));
-    app.contact().deleteFromGroup(deletedContact);
-  }
 
   }
 }
