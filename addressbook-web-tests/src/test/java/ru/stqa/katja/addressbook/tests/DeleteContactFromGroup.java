@@ -1,12 +1,23 @@
 package ru.stqa.katja.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
 import ru.stqa.katja.addressbook.model.GroupData;
 import ru.stqa.katja.addressbook.model.Groups;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsString;
 
 public class DeleteContactFromGroup extends TestBase {
   @BeforeMethod
@@ -37,6 +48,14 @@ public class DeleteContactFromGroup extends TestBase {
       app.goTo().homePage();
       app.contact().deleteFromGroup(deletedContact);
     }
+
+    String deletedGroup = deletedContact.getGroups().iterator().next().getName();
+  //  Set<ContactData> list = new HashSet<ContactData>(app.contact().toString());
+    MatcherAssert.assertThat(deletedContact.getGroups(), contains(not(deletedGroup)));
+
+
+
+
 
   }
 }
