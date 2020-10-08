@@ -10,6 +10,7 @@ import ru.stqa.katja.addressbook.model.GroupData;
 import ru.stqa.katja.addressbook.model.Groups;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +31,9 @@ public class DeleteContactFromGroup extends TestBase {
     File photo = new File("src/test/resources/avatar.png");
     Groups groups = app.db().groups();
     if (app.db().contacts().size() == 0) {
-      app.contact().create(new ContactData().withFirstname("Donald").withLastname("Duck").withPhoto(photo).inGroup((groups.iterator().next())));
+      app.contact().create(new ContactData().withFirstname("Donald").withLastname("Duck").withPhoto(photo)
+             // .inGroup((groups.iterator().next()))
+      );
       app.goTo().homePage();
     }
   }
@@ -39,23 +42,20 @@ public class DeleteContactFromGroup extends TestBase {
   public void testDeleteContactFromGroup() {
     Groups groups = app.db().groups();
     ContactData deletedContact = app.db().contacts().iterator().next();
-    if (deletedContact.getGroups().size() > 0) {
-      app.goTo().homePage();
-      app.contact().deleteFromGroup(deletedContact);
+    GroupData deletedGroup = groups.iterator().next();
+//    int groupId = deletedGroup.getId();
+    if (deletedContact.getGroups().contains(deletedGroup)) {
+
     } else {
-      GroupData addedGroup = app.db().groups().iterator().next();
-      app.contact().addToGroup((deletedContact.inGroup((groups.iterator().next()))), addedGroup);
-      app.goTo().homePage();
-      app.contact().deleteFromGroup(deletedContact);
+      app.contact().addToGroup((deletedContact.inGroup((groups.iterator().next()))), deletedGroup);
     }
 
-    String deletedGroup = deletedContact.getGroups().iterator().next().getName();
-  //  Set<ContactData> list = new HashSet<ContactData>(app.contact().toString());
-    MatcherAssert.assertThat(deletedContact.getGroups(), contains(not(deletedGroup)));
-
-
-
-
+    app.goTo().homePage();
+    app.contact().deleteFromGroup(deletedContact, deletedGroup);
+ // GroupData deletedGroup = deletedContact.getGroups().iterator().next();
+    int idOfDeletedContact = deletedContact.getId();
+    ContactData deletedContactAfter =app.db().contactByID(idOfDeletedContact).iterator().next();
+    MatcherAssert.assertThat(Arrays.asList(deletedContactAfter.getGroups()), contains(deletedGroup));
 
   }
 }

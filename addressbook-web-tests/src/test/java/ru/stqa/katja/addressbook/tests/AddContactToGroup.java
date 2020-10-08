@@ -7,6 +7,9 @@ import ru.stqa.katja.addressbook.model.ContactData;
 import ru.stqa.katja.addressbook.model.GroupData;
 import ru.stqa.katja.addressbook.model.Groups;
 
+import java.util.Arrays;
+
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.contains;
 
@@ -32,14 +35,15 @@ public class AddContactToGroup extends TestBase {
       GroupData addedGroup = app.db().groups().iterator().next();
     if (addedContact.getGroups().contains(addedGroup)) {
       app.goTo().homePage();
-      app.contact().deleteFromGroup(addedContact);
+       app.contact().deleteFromGroup(addedContact, addedGroup);
       app.goTo().homePage();
       app.contact().selectAllOnHomePage();
          }
      app.contact().addToGroup(addedContact, addedGroup);
     int idOfaddedContact = addedContact.getId();
-    ContactData addedContactAfter =app.db().contactByID(idOfaddedContact).iterator().next(); ;
-    assertThat(addedContactAfter.getGroups(), contains(addedGroup));
+    ContactData addedContactAfter =app.db().contactByID(idOfaddedContact).iterator().next();
+    assertThat(Arrays.asList(addedContactAfter.getGroups()), contains(addedGroup));
+
     }
 
 }

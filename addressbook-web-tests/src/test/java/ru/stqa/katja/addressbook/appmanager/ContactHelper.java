@@ -120,15 +120,20 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@value='Add to'])"));
   }
 
-  public void deleteFromGroup(ContactData deletedContact) {
-    selectGroupOnHomePage(deletedContact);
+  public void deleteFromGroup(ContactData deletedContact, GroupData deletedGroup) {
+    selectGroupOnHomePage(deletedGroup);
     selectContactById(deletedContact.getId());
     click(By.xpath("(//input[@name='remove'])"));
 
   }
 
-  private void selectGroupOnHomePage(ContactData deletedContact) {
-    new Select(wd.findElement(By.name("group"))).selectByVisibleText(deletedContact.getGroups().iterator().next().getName());
+  private void selectGroupOnHomePage(GroupData deleted1Group) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(deleted1Group.getName());
+  }
+
+  public void selectAllOnHomePage() {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+
   }
 
   public void delete(int index) {
