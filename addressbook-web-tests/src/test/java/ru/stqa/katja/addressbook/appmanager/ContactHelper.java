@@ -127,8 +127,8 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  private void selectGroupOnHomePage(GroupData deleted1Group) {
-    new Select(wd.findElement(By.name("group"))).selectByVisibleText(deleted1Group.getName());
+  private void selectGroupOnHomePage(GroupData deletedGroup) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(deletedGroup.getName());
   }
 
   public void selectAllOnHomePage() {

@@ -1,17 +1,13 @@
 package ru.stqa.katja.addressbook.tests;
 
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.katja.addressbook.model.ContactData;
 import ru.stqa.katja.addressbook.model.GroupData;
 import ru.stqa.katja.addressbook.model.Groups;
 
-import java.util.Arrays;
-
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddContactToGroup extends TestBase {
 
@@ -32,18 +28,18 @@ public class AddContactToGroup extends TestBase {
   @Test
   public void testAddContactToGroup() {
     ContactData addedContact = app.db().contacts().iterator().next();
-      GroupData addedGroup = app.db().groups().iterator().next();
+    GroupData addedGroup = app.db().groups().iterator().next();
     if (addedContact.getGroups().contains(addedGroup)) {
       app.goTo().homePage();
-       app.contact().deleteFromGroup(addedContact, addedGroup);
+      app.contact().deleteFromGroup(addedContact, addedGroup);
       app.goTo().homePage();
       app.contact().selectAllOnHomePage();
-         }
-     app.contact().addToGroup(addedContact, addedGroup);
-    int idOfaddedContact = addedContact.getId();
-    ContactData addedContactAfter =app.db().contactByID(idOfaddedContact).iterator().next();
-    assertThat(Arrays.asList(addedContactAfter.getGroups()), contains(addedGroup));
-
     }
+    app.contact().addToGroup(addedContact, addedGroup);
+    int idOfaddedContact = addedContact.getId();
+    ContactData addedContactAfter = app.db().contactByID(idOfaddedContact).iterator().next();
+    assertThat(addedContactAfter.getGroups(), hasItem(addedGroup));
+
+  }
 
 }
