@@ -30,12 +30,9 @@ public class DeleteContactFromGroup extends TestBase {
     Groups groups = app.db().groups();
     ContactData deletedContact = app.db().contacts().iterator().next();
     GroupData deletedGroup = groups.iterator().next();
-    if (deletedContact.getGroups().contains((deletedGroup))) {
-
-    } else {
+    if (!deletedContact.getGroups().contains((deletedGroup))) {
       app.contact().addToGroup((deletedContact.inGroup((groups.iterator().next()))), deletedGroup);
     }
-
     app.goTo().homePage();
     app.contact().deleteFromGroup(deletedContact, deletedGroup);
     int idOfDeletedContact = deletedContact.getId();
