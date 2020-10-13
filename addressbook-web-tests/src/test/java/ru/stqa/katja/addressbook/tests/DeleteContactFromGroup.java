@@ -31,7 +31,12 @@ public class DeleteContactFromGroup extends TestBase {
     }
   }
 
-  @Test
+
+
+
+
+
+  /*@Test
   public void testDeleteContactFromGroup() {
     Groups groups = app.db().groups();
     GroupData deletedGroup = groups.iterator().next();
@@ -47,7 +52,7 @@ public class DeleteContactFromGroup extends TestBase {
       assertThat(deletedContactAfter.getGroups(), not(hasItem(deletedGroup)));
       break;
       }
-  }
+  }*/
   }
 
 
