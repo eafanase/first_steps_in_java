@@ -5,87 +5,67 @@ import org.testng.annotations.Test;
 import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
 import ru.stqa.katja.addressbook.model.GroupData;
+import ru.stqa.katja.addressbook.model.Groups;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+
 public class AddContactToGroup extends TestBase {
 
+  public ContactData foundContact;
+  public GroupData foundGroup;
+
   @BeforeMethod
-  public void ensurePreconditionsContact() {
+  public void searchGroupAndContact() {
+
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
     }
     app.goTo().homePage();
+    File photo = new File("src/test/resources/avatar.png");
     if (app.db().contacts().size() == 0) {
-      app.contact().create(new ContactData().withFirstname("Donald").withLastname("Duck"));
+      app.contact().create(new ContactData().withFirstname("Donald").withLastname("Duck").withPhoto(photo));
       app.goTo().homePage();
     }
-  }
 
-  @Test
-  public void testAddContactToGroup() {
-    Contact addedContact = app.db().contacts();
-    GroupData addedGroup = app.db().groups().iterator().next();
+    Contact allContacts = app.db().contacts();
+    Groups allGroups = app.db().groups();
+    int allGroupsSize = allGroups.size();
 
 
-
-
-
-
-
-
-
-//    List<ContactData> allContacts = new ArrayList<ContactData>(app.db().contacts());
-//    GroupData addedGroup = app.db().groups().iterator().next();
-//    for (ContactData Contact : allContacts) {
-//      if (!Contact.getGroups().contains(addedGroup)) {
-//        app.goTo().homePage();
-//        app.contact().addToGroup(Contact, addedGroup);
-//
-//      } else {
-//        File photo = new File("src/test/resources/avatar.png");
-//        ContactData contact = new ContactData().withFirstname("Minni").withLastname("Mouse").withPhoto(photo);
-//        app.contact().create(contact);
-//        app.goTo().homePage();
-//        Contact after = app.db().contacts();
-//        app.contact().addToGroup(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()), addedGroup);
-
+    foundContact = null;
+    Iterator<ContactData> i = allContacts.iterator();
+    while (i.hasNext()) {
+      ContactData с = i.next();
+      if (с.getGroups().size() < allGroupsSize) {
+        foundContact = с;
+        GroupData selectedGroup  = app.contact().findUniqueGroup(foundContact, allGroups);
+        foundGroup = selectedGroup;
+        break;
       }
 
- //     int idOfaddedContact = Contact.getId();
-  //    ContactData addedContactAfter = app.db().contactByID(idOfaddedContact).iterator().next();
-  //    assertThat(addedContactAfter.getGroups(), hasItem(addedGroup));
+      } if (foundContact== null){
+      app.goTo().groupPage();
+      GroupData newGroup = new GroupData().withName("UniqueGroup").withHeader("UniqueHeader").withFooter("UniqueFooter");
+      app.group().create(newGroup);
+      Groups allGroupsAfter = app.db().groups();
+      foundGroup = newGroup.withId(allGroupsAfter.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+      foundContact = allContacts.iterator().next();
+      }
     }
 
-
-    //  ContactData addedContact = app.db().contacts().iterator().next();
-//
-//    if (addedContact.getGroups().contains(addedGroup)) {
-//
-//      for (Object Contact:allContacts){
-//        if (allContacts.toString().contains((CharSequence) addedGroup)){
-//         app.contact().create(new ContactData());
-//          app.contact().addToGroup(addedContact, addedGroup);
-//
-//        }
-//      }
-//
-// //     app.goTo().homePage();
-// //     app.contact().deleteFromGroup(addedContact, addedGroup);
-// //     app.goTo().homePage();
-// //     app.contact().selectAllOnHomePage();
-//    }
-//    app.contact().addToGroup(addedContact, addedGroup);
-//    int idOfaddedContact = addedContact.getId();
-//    ContactData addedContactAfter = app.db().contactByID(idOfaddedContact).iterator().next();
-//    assertThat(addedContactAfter.getGroups(), hasItem(addedGroup));
-
-//  }
-
-//}
+    @Test
+    public void testAddContactToGroup() {
+      app.goTo().homePage();
+      app.contact().addToGroup(foundContact, foundGroup);
+      app.goTo().homePage();
+      int idOfFoundContact = foundContact.getId();
+      ContactData foundContactAfter = app.db().contactByID(idOfFoundContact).iterator().next();
+      assertThat(foundContactAfter.getGroups(), hasItem(foundGroup));
+    }
+}

@@ -8,8 +8,10 @@ import org.testng.Assert;
 import ru.stqa.katja.addressbook.model.Contact;
 import ru.stqa.katja.addressbook.model.ContactData;
 import ru.stqa.katja.addressbook.model.GroupData;
+import ru.stqa.katja.addressbook.model.Groups;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -208,5 +210,16 @@ public class ContactHelper extends HelperBase {
   }
 
 
-
+  public GroupData findUniqueGroup(ContactData foundContact, Groups allGroups) {
+    GroupData selectedGroup = null;
+    Iterator<GroupData> i = allGroups.iterator();
+    while (i.hasNext()) {
+      GroupData g = i.next();
+      if (!foundContact.getGroups().contains(g)) {
+        selectedGroup = g;
+        break;
+      }
+    }
+    return selectedGroup;
+  }
 }

@@ -11,9 +11,12 @@ import ru.stqa.katja.addressbook.model.GroupData;
 import ru.stqa.katja.addressbook.model.Groups;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DbHelper {
     private final SessionFactory sessionFactory;
+
+
   public DbHelper () {
   // A SessionFactory is set up once for an application!
   final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -49,4 +52,5 @@ public Groups groups () {
     session.close();
     return new Contact(result);
   }
+
 }
