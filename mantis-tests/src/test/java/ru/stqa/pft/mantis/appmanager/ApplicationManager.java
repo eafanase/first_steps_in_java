@@ -1,6 +1,5 @@
 package ru.stqa.pft.mantis.appmanager;
 
-import com.mysql.cj.Session;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,7 +10,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.regex.MatchResult;
 
 public class ApplicationManager {
   private final Properties properties;
@@ -21,6 +19,8 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private DBHelper dbHelper;
+  private SessionHelper uiHelper;
 
   public ApplicationManager(String browser) throws IOException {
     this.browser = browser;
@@ -89,4 +89,19 @@ public class ApplicationManager {
     }
     return jamesHelper;
   }
+
+  public DBHelper db() {
+    if (dbHelper == null) {
+      dbHelper = new DBHelper(this);
+    }
+    return dbHelper;
+  }
+
+  public SessionHelper ui() {
+    if (uiHelper == null) {
+      uiHelper = new SessionHelper(this);
+    }
+    return uiHelper;
+  }
+
 }
