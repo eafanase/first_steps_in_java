@@ -1,22 +1,15 @@
 package ru.stqa.pft.mantis.tests;
 
 import biz.futureware.mantis.rpc.soap.client.IssueData;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
-import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.mantis.appmanager.ApplicationManager;
-import ru.stqa.pft.mantis.appmanager.SoapHelper;
-import ru.stqa.pft.mantis.model.Issue;
-
 import javax.xml.rpc.ServiceException;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.rmi.RemoteException;
 
 
@@ -39,7 +32,7 @@ public class TestBase {
     app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php_back");
   }
 
-  @AfterSuite (alwaysRun = true)
+  @AfterSuite(alwaysRun = true)
   public void tearDown() throws IOException {
     app.ftp().restore("config_inc.php_back", "config_inc.php");
     app.stop();

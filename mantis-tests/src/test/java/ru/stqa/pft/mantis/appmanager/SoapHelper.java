@@ -1,12 +1,6 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.*;
-import org.apache.axis.SimpleChain;
-import org.apache.axis.SimpleTargetedChain;
-import org.apache.axis.client.AxisClient;
-import org.apache.axis.configuration.SimpleProvider;
-import org.apache.axis.transport.http.HTTPSender;
-import org.apache.axis.transport.http.HTTPTransport;
 import ru.stqa.pft.mantis.model.Issue;
 import ru.stqa.pft.mantis.model.Project;
 
@@ -18,22 +12,26 @@ import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.axis.Handler;
+
 
 public class SoapHelper {
   private ApplicationManager app;
 
-  public SoapHelper(ApplicationManager app){
+  public SoapHelper(ApplicationManager app) {
     this.app = app;
   }
+
   public Set<Project> getProjects() throws RemoteException, MalformedURLException, ServiceException {
     MantisConnectPortType mc = getMantisConnect();
     ProjectData[] projects = mc.mc_projects_get_user_accessible(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
     return Arrays.asList(projects).stream()
-            .map((p)-> new Project().withId(p.getId().intValue()).withName(p.getName())).collect(Collectors.toSet());
+            .map((p) -> new Project()
+                    .withId(p.getId().intValue())
+                    .withName(p.getName()))
+            .collect(Collectors.toSet());
   }
 
-  private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+  /*private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
     SimpleProvider clientConfig = new SimpleProvider();
     AxisLogHandler logHandler = new AxisLogHandler();
     SimpleChain reqHandler = new SimpleChain();
@@ -47,18 +45,18 @@ public class SoapHelper {
     MantisConnectLocator locator = new MantisConnectLocator();
     locator.setEngineConfiguration(clientConfig);
     locator.setEngine(new AxisClient(clientConfig));
-    return locator.getMantisConnectPort(new URL("http://localhost:8080/mantisbt-2.24.2/mantisbt-2.24.2/api/soap/mantisconnect.php?wsdl"));
+    return locator.getMantisConnectPort(new URL("http://localhost:8080/mantisbt-2.24.2/mantisbt-2.24.2/api/soap/mantisconnect.php"));
   }
+*/
 
-
-//  private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
-//    return new MantisConnectLocator()
-//              .getMantisConnectPort(new URL("http://localhost:8080/mantisbt-2.24.2/mantisbt-2.24.2/api/soap/mantisconnect.php?wsdl"));
-//  }
+  private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+    return new MantisConnectLocator()
+            .getMantisConnectPort(new URL("http://localhost:8080/mantisbt-2.24.2/mantisbt-2.24.2/api/soap/mantisconnect.php"));
+  }
 
   public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
     MantisConnectPortType mc = getMantisConnect();
-    String [] categories = mc.mc_project_get_categories(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issue.getProject().getId()));
+    String[] categories = mc.mc_project_get_categories(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issue.getProject().getId()));
     IssueData issueData = new IssueData();
     issueData.setSummary(issue.getSummary());
     issueData.setDescription(issue.getDescription());
@@ -70,7 +68,7 @@ public class SoapHelper {
             .withSummary(createdIissueData.getSummary())
             .withDescription(createdIissueData.getDescription())
             .withProject(new Project().withId(createdIissueData.getProject().getId().intValue())
-                                      .withName(createdIissueData.getProject().getName()));
+                    .withName(createdIissueData.getProject().getName()));
   }
 
 
@@ -79,8 +77,6 @@ public class SoapHelper {
     return mc.mc_issue_get(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issueId));
 
   }
-
-
 
 
 }

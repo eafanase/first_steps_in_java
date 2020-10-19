@@ -21,11 +21,12 @@ public class AxisLogHandler extends BasicHandler {
     Message outMsg = msgContext.getResponseMessage();
     if(outMsg == null) {
       System.out.println("============================= REQUEST ============================================");
-      System.out.println(Messages.getMessage("inMsg00", (inMsg == null ? "" : inMsg.getSOAPEnvelope().getAsString())));
+      inMsg.writeTo(System.out);
+      System.out.println("");
     }
     else {
       System.out.println("===================================RESPONSE======================================");
-      System.out.println(Messages.getMessage("outMsg00", (outMsg == null ? "" : outMsg.getSOAPEnvelope().getAsString())));
+      outMsg.writeTo(System.out);
     }
   }
   @Override public void onFault(MessageContext msgContext) { super.onFault(msgContext);
