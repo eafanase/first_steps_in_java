@@ -1,13 +1,23 @@
 package ru.stqa.pft.mantis.tests;
 
+import biz.futureware.mantis.rpc.soap.client.IssueData;
+import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
+import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.mantis.appmanager.ApplicationManager;
+import ru.stqa.pft.mantis.appmanager.SoapHelper;
+import ru.stqa.pft.mantis.model.Issue;
 
+import javax.xml.rpc.ServiceException;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.rmi.RemoteException;
 
 
 public class TestBase {
@@ -35,7 +45,18 @@ public class TestBase {
     app.stop();
   }
 
+  public boolean isIssueOpen(int issueId) throws ServiceException, MalformedURLException, RemoteException {
+    IssueData issue = app.soap().getIssue(issueId);
+    if (issue.getStatus().getName().equals("resolved") || issue.getStatus().getName().equals("closed")) {
+      return false;
+    }
+    return true;
+  }
 
-
+  public void skipIfNotFixed(int issueId) throws IOException, ServiceException {
+    if (isIssueOpen(issueId)) {
+      throw new SkipException("Ignored because of issue " + issueId);
+    }
+  }
 
 }
