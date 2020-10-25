@@ -3,12 +3,12 @@ apply plugin: 'java'
 repositories {mavenCentral()
 }
 
-test  {
+/*test  {
     useTestNG{
          suites 'src/test/resources/testng.xml'
     }
 
-}
+}*/
 
 
 dependencies {
@@ -28,10 +28,8 @@ buildscript{
 apply plugin: 'no.nils.wsdl2java'
 
 wsdl2java {
-   // generateWsdlDir = file ("src/main/java")
-    wsdlDir = file("src/main/resources") // define to support incremental build
-    wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
-                           ['src/main/resources/ipservice.wsdl']
+    wsdlDir = file("${projectDir}/src/main/resources")
+    wsdlsToGenerate = [
+            ["${projectDir}/src/main/resources/ipservice.wsdl"]
     ]
-
 }
