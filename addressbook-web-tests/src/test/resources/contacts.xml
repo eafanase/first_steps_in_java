@@ -1,0 +1,20 @@
+<list>
+  <contact>
+    <firstname>Donald 0</firstname>
+    <lastname>Duck 0</lastname>
+    <phone>888880</phone>
+    <group>test1</group>
+  </contact>
+  <contact>
+    <firstname>Donald 1</firstname>
+    <lastname>Duck 1</lastname>
+    <phone>888881</phone>
+    <group>test1</group>
+  </contact>
+  <contact>
+    <firstname>Donald 2</firstname>
+    <lastname>Duck 2</lastname>
+    <phone>888882</phone>
+    <group>test1</group>
+  </contact>
+</list>

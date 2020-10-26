@@ -1,0 +1,33 @@
+[
+  {
+    "firstname": "Donald 0",
+    "lastname": "Duck 0",
+    "company":"DuckCompany",
+    "address":"Disneyland 000",
+    "phone": "888880",
+    "mobphone": "9999",
+    "workphone": "88888",
+    "email":"duck@duck.com 0",
+    "email2":"duck@duck.com 00",
+    "email3":"duck@duck.com 000",
+    "byear": "1928",
+    "group": "test1",
+    "photo": "C:\\Users\\eafanase\\Documents\\GitHub\\first_steps_in_java\\addressbook-web-tests\\src\\test\\resources\\avatar.PNG"
+  },
+  {
+    "firstname": "Donald 1",
+    "lastname": "Duck 1",
+    "company":"DuckCompany",
+    "address":"Disneyland 111",
+    "phone": "888880",
+    "mobphone": "9999",
+    "workphone": "88888",
+    "email":"duck@duck.com 1",
+    "email2":"duck@duck.com 11",
+    "email3":"duck@duck.com 111",
+    "phone": "888881",
+    "byear": "1930",
+    "group": "test1",
+    "photo": "C:\\Users\\eafanase\\Documents\\GitHub\\first_steps_in_java\\addressbook-web-tests\\src\\test\\resources\\avatar.PNG"
+  }
+]
